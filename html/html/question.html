@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <link rel="icon" href="/img/ga3da.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ga3da</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        #questionImage {
+            max-width: 100%;
+            height: auto;
+            display: none; 
+        }
+        #answerImage {
+            max-width: 60vh;
+            height: 30vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            display: flex;   
+        }
+        .image-container, .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            height: 300px; 
+            margin-bottom: 20px; 
+            border-radius: 30px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">قعده</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>تفاصيل السؤال</h1>
+        <div id="questionContainer">
+            <img class="image-container" id="questionImage" alt="صورة السؤال">
+            <p  id="questionText">النص سيكون هنا</p>
+        </div>
+        <button id="showAnswerButton" class="btn btn-primary">عرض الإجابة</button>
+        <div id="answerContainer" style="display: none;">
+            <p id="answerText">الإجابة ستكون هنا</p>
+            <img class="image-container" id="answerImage" alt="صورة الإجابة">
+            <button id="showTeamButton" class="btn btn-primary">من حصل على النقاط؟</button>
+        </div>
+        <div id="teamContainer" style="display: none;">
+            <button class="btn btn-success" onclick="setTeam('الفريق 1')">الفريق 1</button>
+            <button class="btn btn-success" onclick="setTeam('الفريق 2')">الفريق 2</button>
+            <p id="teamName"></p>
+        </div>
+        <a href="questions.html" class="btn btn-primary">العودة إلى الأسئلة</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const id = parseInt(params.get('id'), 10);
+
+            const questions = {
+                // فئة: من هذا اللاعب
+                1: { 
+                    text: 'من هذا اللاعب', 
+                    answer: 'كريستيانو رونالدو', 
+                    points: '300', 
+                    questionImage: '/img/who-player/question/cristiano-eye.png', 
+                    answerImage: '/img/who-player/answer/cristiano-image.png'
+                },
+                2: { 
+                    text: 'من هذا اللاعب', 
+                    answer: 'كريم بنزيما', 
+                    points: '300', 
+                    questionImage: '/img/who-player/question/karim-benzema-eye.png', 
+                    answerImage: '/img/who-player/answer/karim-benzema-image.webp'
+                },
+                3: { 
+                    text: 'من هذا اللاعب', 
+                    answer: 'فيكتور اوسمين', 
+                    points: '500', 
+                    questionImage: '/img/who-player/question/victor-osimhen-eye.png', 
+                    answerImage: '/img/who-player/answer/victor-osimhen-image.jpg'
+                },
+                4: { 
+                    text: 'من هذا اللاعب', 
+                    answer: 'نيمار جونيور', 
+                    points: '500', 
+                    questionImage: '/img/neymar-eye.png', 
+                    answerImage: '/img/neymar-image.png'
+                },
+                5: { 
+                    text: 'من هذا اللاعب', 
+                    answer: 'محمد صلاح', 
+                    points: '600', 
+                    questionImage: '/img/salah-eye.png', 
+                    answerImage: '/img/salah-image.png'
+                },
+                6: { 
+                    text: 'من هذا اللاعب', 
+                    answer: 'زين الدين زيدان', 
+                    points: '600', 
+                    questionImage: '/img/zidane-eye.png', 
+                    answerImage: '/img/zidane-image.png'
+                },
+
+                // فئة: سؤال من اعلام
+                7: { 
+                    text: 'لمن هذا العلم', 
+                    answer: 'المانيا', 
+                    points: '300', 
+                    questionImage: '/img/flag/germany.jpeg', 
+                    answerImage: '/img/flag/germany.jpeg'
+                },
+                8: { 
+                    text: 'لمن هذا العلم', 
+                    answer: 'الامارات', 
+                    points: '300', 
+                    questionImage: '/img/flag/uae.png', 
+                    answerImage: '/img/flag/uae.png'
+                },
+                9: { 
+                    text: 'لمن هذا العلم', 
+                    answer: 'سنغافوره', 
+                    points: '500', 
+                    questionImage: '/img/flag/singapore.png', 
+                    answerImage: '/img/flag/singapore.png'
+                },
+                10: { 
+                    text: 'لمن هذا العلم', 
+                    answer: 'جنوب افريقيا', 
+                    points: '500', 
+                    questionImage: '/img/flag/south-afirca.jpeg', 
+                    answerImage: '/img/flag/south-afirca.jpeg'
+                },
+                11: { 
+                    text: 'لمن هذا العلم', 
+                    answer: 'جميكيا', 
+                    points: '600', 
+                    questionImage: '/img/flag/jamaican.jpeg', 
+                    answerImage: '/img/flag/jamaican.jpeg'
+                },
+                12: { 
+                    text: 'لمن هذا العلم', 
+                    answer: 'سيرلنكا', 
+                    points: '600', 
+                    questionImage: '/img/flag/sriLanka.png', 
+                    answerImage: '/img/flag/sriLanka.png'
+                },
+
+                // فئة: سؤال من معلومات عامة
+                13: { 
+                    text: 'ما هي نسبة المياه من الكرة الأرضية ؟	', 
+                    answer: '71%', 
+                    points: '300', 
+                    questionImage: '/img/general/general.png', 
+                    answerImage: '/img/general/general.png'
+                },
+                14: { 
+                    text: 'ما هي المدينة التي تسمى بمدينة الضباب ؟	', 
+                    answer: 'لندن', 
+                    points: '300', 
+                    questionImage: '/img/general/general.png', 
+                    answerImage: '/img/general/general.png'
+                },
+                15: { 
+                    text: 'في أنف الإنسان يوجد ما يسمي بالجيوب الأنفية فما عدد هذه الجيوب ؟', 
+                    answer: '8 جيوب', 
+                    points: '500', 
+                    questionImage: '/img/general/general.png', 
+                    answerImage: '/img/general/general.png'
+                },
+                16: { 
+                    text: 'ما اسم وحدة قياس الصوت؟', 
+                    answer: 'االديسبل', 
+                    points: '500', 
+                    questionImage: '/img/general/general.png', 
+                    answerImage: '/img/general/general.png'
+                },
+                17: { 
+                    text: 'ما هو الزهرة الوطنية لليابان', 
+                    answer: 'زهرة الكرز', 
+                    points: '600', 
+                    questionImage: '/img/general/general.png', 
+                    answerImage: '/img/general/general.png'
+                },
+                18: { 
+                    text: 'كم عدد المناطق الزمنية ففي روسيا؟', 
+                    answer: '11', 
+                    points: '600', 
+                    questionImage: '/img/general/general.png', 
+                    answerImage: '/img/general/general.png'
+                },
+
+                // فئة: سؤال من إسلاميات
+                19: { 
+                    text: 'ما هو الدعاء الذي يردده المصلين بين السجدتين؟', 
+                    answer: ' اللهم اغفر لي ذنبي.', 
+                    points: '300', 
+                    questionImage: '/img/islamic/islamic.jpg', 
+                    answerImage: '/img/islamic/islamic.jpg'
+                },
+                20: { 
+                    text: 'ما هو اسم الملك الذي يقف خازناً على جهنم؟', 
+                    answer: 'مالك', 
+                    points: '300', 
+                    questionImage: '/img/islamic/islamic.jpg', 
+                    answerImage: '/img/islamic/islamic.jpg'
+                },
+                21: { 
+                    text: 'من هو الشخص الذي أُنزلت فيه سورة الهمزة؟', 
+                    answer: 'أمية بن خلف', 
+                    points: '500', 
+                    questionImage: '/img/islamic/islamic.jpg', 
+                    answerImage: '/img/islamic/islamic.jpg'
+                },
+                22: { 
+                    text: 'ما اسم أول قبيلة يهودية قامت بنقض عهدها مع الرسول؟', 
+                    answer: 'بني قينقاع', 
+                    points: '500', 
+                    questionImage: '/img/islamic/islamic.jpg', 
+                    answerImage: '/img/islamic/islamic.jpg'
+                },
+                23: { 
+                    text: 'من آخر من توفى من زوجات النبي؟', 
+                    answer: 'السيدة أم سلمة', 
+                    points: '600', 
+                    questionImage: '/img/islamic/islamic.jpg', 
+                    answerImage: '/img/islamic/islamic.jpg'
+                },
+                24: { 
+                    text: 'ما اسم السورة التي دعا بها النبي زكريا عليه السلام؟', 
+                    answer: 'سورة الأنبياء', 
+                    points: '600', 
+                    questionImage: '/img/islamic/islamic.jpg', 
+                    answerImage: '/img/islamic/islamic.jpg'
+                },
+
+                // فئة: سؤال من من سجل الهدف
+                25: { 
+                    text: 'سؤال 1 من من سجل الهدف', 
+                    answer: 'الإجابة 1', 
+                    points: '300', 
+                    questionImage: '/img/scorer1.png', 
+                    answerImage: '/img/scorer1-answer.png'
+                },
+                26: { 
+                    text: 'سؤال 2 من من سجل الهدف', 
+                    answer: 'الإجابة 2', 
+                    points: '300', 
+                    questionImage: '/img/scorer2.png', 
+                    answerImage: '/img/scorer2-answer.png'
+                },
+                27: { 
+                    text: 'سؤال 3 من من سجل الهدف', 
+                    answer: 'الإجابة 3', 
+                    points: '500', 
+                    questionImage: '/img/scorer3.png', 
+                    answerImage: '/img/scorer3-answer.png'
+                },
+                28: { 
+                    text: 'سؤال 4 من من سجل الهدف', 
+                    answer: 'الإجابة 4', 
+                    points: '500', 
+                    questionImage: '/img/scorer4.png', 
+                    answerImage: '/img/scorer4-answer.png'
+                },
+                29: { 
+                    text: 'سؤال 5 من من سجل الهدف', 
+                    answer: 'الإجابة 5', 
+                    points: '600', 
+                    questionImage: '/img/scorer5.png', 
+                    answerImage: '/img/scorer5-answer.png'
+                },
+                30: { 
+                    text: 'سؤال 6 من من سجل الهدف', 
+                    answer: 'الإجابة 6', 
+                    points: '600', 
+                    questionImage: '/img/scorer6.png', 
+                    answerImage: '/img/scorer6-answer.png'
+                },
+
+                // فئة: سؤال من أمثال كويتية
+                31: { 
+                    text: 'حلات الثوب', 
+                    answer: 'رقعته منه وفيه', 
+                    points: '300', 
+                    questionImage: '/img/kuwait1.png', 
+                    answerImage: '/img/kuwait1-answer.png'
+                },
+                32: { 
+                    text: 'مال البخيل', 
+                    answer: 'ياكله العيار', 
+                    points: '300', 
+                    questionImage: '/img/kuwait2.png', 
+                    answerImage: '/img/kuwait2-answer.png'
+                },
+                33: { 
+                    text: 'الناس للناس', 
+                    answer: 'والكل بالله', 
+                    points: '500', 
+                    questionImage: '/img/kuwait3.png', 
+                    answerImage: '/img/kuwait3-answer.png'
+                },
+                34: { 
+                    text: 'العين ما تعلى', 
+                    answer: 'على الحاجب', 
+                    points: '500', 
+                    questionImage: '/img/kuwait4.png', 
+                    answerImage: '/img/kuwait4-answer.png'
+                },
+                35: { 
+                    text: 'كثر الدق', 
+                    answer: 'يفك اللحام', 
+                    points: '600', 
+                    questionImage: '/img/kuwait5.png', 
+                    answerImage: '/img/kuwait5-answer.png'
+                },
+                36: { 
+                    text: 'سو خير', 
+                    answer: 'وقطه بحر', 
+                    points: '600', 
+                    questionImage: '/img/kuwait6.png', 
+                    answerImage: '/img/kuwait6-answer.png'
+                },
+
+                // فئة: سؤال من مقتطفات من أفلام
+                37: { 
+                    text: 'سؤال 1 من مقتطفات من أفلام', 
+                    answer: 'الإجابة 1', 
+                    points: '300', 
+                    questionImage: '/img/movies1.png', 
+                    answerImage: '/img/movies1-answer.png'
+                },
+                38: { 
+                    text: 'سؤال 2 من مقتطفات من أفلام', 
+                    answer: 'الإجابة 2', 
+                    points: '300', 
+                    questionImage: '/img/movies2.png', 
+                    answerImage: '/img/movies2-answer.png'
+                },
+                39: { 
+                    text: 'سؤال 3 من مقتطفات من أفلام', 
+                    answer: 'الإجابة 3', 
+                    points: '500', 
+                    questionImage: '/img/movies3.png', 
+                    answerImage: '/img/movies3-answer.png'
+                },
+                40: { 
+                    text: 'سؤال 4 من مقتطفات من أفلام', 
+                    answer: 'الإجابة 4', 
+                    points: '500', 
+                    questionImage: '/img/movies4.png', 
+                    answerImage: '/img/movies4-answer.png'
+                },
+                41: { 
+                    text: 'سؤال 5 من مقتطفات من أفلام', 
+                    answer: 'الإجابة 5', 
+                    points: '600', 
+                    questionImage: '/img/movies5.png', 
+                    answerImage: '/img/movies5-answer.png'
+                },
+                42: { 
+                    text: 'سؤال 6 من مقتطفات من أفلام', 
+                    answer: 'الإجابة 6', 
+                    points: '600', 
+                    questionImage: '/img/movies6.png', 
+                    answerImage: '/img/movies6-answer.png'
+                },
+                //فئة غزوات
+                43: { 
+                    text: 'متى وقعت غزوة بدر؟', 
+                    answer: 'وقعت في شهر رمضان من العام الهجري الثاني', 
+                    points: '300', 
+                    questionImage: '/img/3`swat.png', 
+                    answerImage: '/img/3`swat.png'
+                },
+                44: { 
+                    text: 'ماهي الحملات التي واجهها النبي صلى الله عليه وسلم ولم يحضرها بنفسه', 
+                    answer: 'السرية', 
+                    points: '300', 
+                    questionImage: '/img/3`swat.png', 
+                    answerImage: '/img/3`swat.png'
+                },                
+                45: { 
+                    text: 'في ذكرى 2 اكتوبر من هو حرر القدس في سنة 492هـ', 
+                    answer: 'صلاح الدين الايوبي', 
+                    points: '500', 
+                    questionImage: '/img/3`swat.png', 
+                    answerImage: '/img/3`swat.png'
+                },
+                46: { 
+                    text: 'من افتتح الاندلس في عام 711هـ', 
+                    answer: 'طارق بن زياد', 
+                    points: '500', 
+                    questionImage: '/img/3`swat.png', 
+                    answerImage: '/img/3`swat.png'
+                },
+                47: { 
+                    text: 'من فتح القسطنطينية', 
+                    answer: 'مُحمَّد خان الثاني', 
+                    points: '600', 
+                    questionImage: '/img/3`swat.png', 
+                    answerImage: '/img/3`swat.png'
+                },
+                48: { 
+                    text: 'هديه', 
+                    answer: '', 
+                    points: '600', 
+                    questionImage: '/img/3`swat.png', 
+                    answerImage: '/img/3`swat.png'
+                },
+            };
+
+            const questionText = document.getElementById('questionText');
+            const questionImage = document.getElementById('questionImage');
+            const answerContainer = document.getElementById('answerContainer');
+            const teamContainer = document.getElementById('teamContainer');
+            const answerImage = document.getElementById('answerImage');
+            const questionContainer = document.getElementById('questionContainer');
+
+            if (questions[id]) {
+                const question = questions[id];
+                questionText.textContent = `${question.text} (${question.points} نقطة)`;
+                 
+                // تعيين صورة السؤال
+                if (question.questionImage) {
+                    questionImage.src = question.questionImage;
+                    questionImage.style.display = 'block'; // عرض صورة السؤال
+                } else {
+                    questionImage.style.display = 'none'; // إخفاء صورة السؤال إذا لم تكن موجودة
+                }
+
+                document.getElementById('showAnswerButton').addEventListener('click', function() {
+                    questionContainer.style.display = 'none'; // إخفاء السؤال وصورته
+                    answerContainer.style.display = 'block';
+                    document.getElementById('answerText').textContent = `الإجابة: ${question.answer}`;
+
+                    // تعيين صورة الإجابة
+                    if (question.answerImage) {
+                        answerImage.src = question.answerImage;
+                        answerImage.style.display = 'block'; // عرض صورة الإجابة
+                    } else {
+                        answerImage.style.display = 'none'; // إخفاء صورة الإجابة إذا لم تكن موجودة
+                    }
+                });
+
+                document.getElementById('showTeamButton').addEventListener('click', function() {
+                    answerContainer.style.display = 'none';
+                    teamContainer.style.display = 'block';
+                });
+
+                window.setTeam = function(team) {
+                    document.getElementById('teamName').textContent = `الفريق الذي حصل على النقاط هو: ${team}`;
+                };
+            } else {
+                // إذا كان معرف السؤال غير صحيح، يمكنك عرض رسالة خطأ أو توجيه إلى صفحة أخرى
+                document.querySelector('.container').innerHTML = '<p>البيانات غير صحيحة</p>';
+            }
+        });
+    </script>
+</body>
+</html>
