@@ -95,7 +95,7 @@
         <!-- تم نقل قسم عرض أسماء الفرق والنقاط إلى هنا -->
         <h2 class="text-center mb-4">الفرق والنقاط</h2>
         <div class="teams-score">
-            <h3>الفرق:</h3>
+            <h3>:الفرق</h3>
             <div class="team-info">
                 <div><span id="team1Name"></span>: <span id="team1Score">0</span> نقاط</div>
                 <div><span id="team2Name"></span>: <span id="team2Score">0</span> نقاط</div>
@@ -124,7 +124,7 @@
             document.getElementById('team2Score').textContent = team2Score;
 
             // عرض دور الفريق
-            const teamTurnText = currentTurn === '1' ? `دور ${team1}` : `دور ${team2}`;
+            const teamTurnText = currentTurn === '1' ? `دور: ${team1}` : `دور ${team2}`;
             document.getElementById('teamTurn').textContent = teamTurnText;
 
             const baseIds = {
@@ -165,61 +165,61 @@
                     { id: 18, text: 'سؤال 18 - 600', points: 600 }
                 ],
                 'اسلاميات': [
-                        { id: 19, text: 'سؤال 19 - 300', points: 300 },
-                        { id: 20, text: 'سؤال 20 - 300', points: 300 },
-                        { id: 21, text: 'سؤال 21 - 500', points: 500 },
-                        { id: 22, text: 'سؤال 22 - 500', points: 500 },
-                        { id: 23, text: 'سؤال 23 - 600', points: 600 },
-                        { id: 24, text: 'سؤال 24 - 600', points: 600 }
-                    ],
-                    'من سجل الهدف': [
-                        { id: 25, text: 'سؤال 25 - 300', points: 300 },
-                        { id: 26, text: 'سؤال 26 - 300', points: 300 },
-                        { id: 27, text: 'سؤال 27 - 500', points: 500 },
-                        { id: 28, text: 'سؤال 28 - 500', points: 500 },
-                        { id: 29, text: 'سؤال 29 - 600', points: 600 },
-                        { id: 30, text: 'سؤال 30 - 600', points: 600 }
-                    ],
-                    'امثال كويتيه': [
-                        { id: 31, text: 'سؤال 31 - 300', points: 300 },
-                        { id: 32, text: 'سؤال 32 - 300', points: 300 },
-                        { id: 33, text: 'سؤال 33 - 500', points: 500 },
-                        { id: 34, text: 'سؤال 34 - 500', points: 500 },
-                        { id: 35, text: 'سؤال 35 - 600', points: 600 },
-                        { id: 36, text: 'سؤال 36 - 600', points: 600 }
-                    ],
-                    'مقتطفات من افلام': [
-                        { id: 37, text: 'سؤال 37 - 300', points: 300 },
-                        { id: 38, text: 'سؤال 38 - 300', points: 300 },
-                        { id: 39, text: 'سؤال 39 - 500', points: 500 },
-                        { id: 40, text: 'سؤال 40 - 500', points: 500 },
-                        { id: 41, text: 'سؤال 41 - 600', points: 600 },
-                        { id: 42, text: 'سؤال 42 - 600', points: 600 }
-                    ],
-                    'غزوات': [
-                        { id: 43, text: 'سؤال 43 - 300', points: 300 },
-                        { id: 44, text: 'سؤال 44 - 300', points: 300 },
-                        { id: 45, text: 'سؤال 45 - 500', points: 500 },
-                        { id: 46, text: 'سؤال 46 - 500', points: 500 },
-                        { id: 47, text: 'سؤال 47 - 600', points: 600 },
-                        { id: 48, text: 'سؤال 48 - 600', points: 600 }
-                    ],
-                    'أناشيد': [
-                        { id: 49, text: 'سؤال 49 - 300', points: 300 },
-                        { id: 50, text: 'سؤال 50 - 300', points: 300 },
-                        { id: 51, text: 'سؤال 51 - 500', points: 500 },
-                        { id: 52, text: 'سؤال 52 - 500', points: 500 },
-                        { id: 53, text: 'سؤال 53 - 600', points: 600 },
-                        { id: 54, text: 'سؤال 54 - 600', points: 600 }
-                    ]
+                    { id: 19, text: 'سؤال 19 - 300', points: 300 },
+                    { id: 20, text: 'سؤال 20 - 300', points: 300 },
+                    { id: 21, text: 'سؤال 21 - 500', points: 500 },
+                    { id: 22, text: 'سؤال 22 - 500', points: 500 },
+                    { id: 23, text: 'سؤال 23 - 600', points: 600 },
+                    { id: 24, text: 'سؤال 24 - 600', points: 600 }
+                ],
+                'من سجل الهدف': [
+                    { id: 25, text: 'سؤال 25 - 300', points: 300 },
+                    { id: 26, text: 'سؤال 26 - 300', points: 300 },
+                    { id: 27, text: 'سؤال 27 - 500', points: 500 },
+                    { id: 28, text: 'سؤال 28 - 500', points: 500 },
+                    { id: 29, text: 'سؤال 29 - 600', points: 600 },
+                    { id: 30, text: 'سؤال 30 - 600', points: 600 }
+                ],
+                'امثال كويتيه': [
+                    { id: 31, text: 'سؤال 31 - 300', points: 300 },
+                    { id: 32, text: 'سؤال 32 - 300', points: 300 },
+                    { id: 33, text: 'سؤال 33 - 500', points: 500 },
+                    { id: 34, text: 'سؤال 34 - 500', points: 500 },
+                    { id: 35, text: 'سؤال 35 - 600', points: 600 },
+                    { id: 36, text: 'سؤال 36 - 600', points: 600 }
+                ],
+                'مقتطفات من افلام': [
+                    { id: 37, text: 'سؤال 37 - 300', points: 300 },
+                    { id: 38, text: 'سؤال 38 - 300', points: 300 },
+                    { id: 39, text: 'سؤال 39 - 500', points: 500 },
+                    { id: 40, text: 'سؤال 40 - 500', points: 500 },
+                    { id: 41, text: 'سؤال 41 - 600', points: 600 },
+                    { id: 42, text: 'سؤال 42 - 600', points: 600 }
+                ],
+                'غزوات': [
+                    { id: 43, text: 'سؤال 43 - 300', points: 300 },
+                    { id: 44, text: 'سؤال 44 - 300', points: 300 },
+                    { id: 45, text: 'سؤال 45 - 500', points: 500 },
+                    { id: 46, text: 'سؤال 46 - 500', points: 500 },
+                    { id: 47, text: 'سؤال 47 - 600', points: 600 },
+                    { id: 48, text: 'سؤال 48 - 600', points: 600 }
+                ],
+                'أناشيد': [
+                    { id: 49, text: 'سؤال 49 - 300', points: 300 },
+                    { id: 50, text: 'سؤال 50 - 300', points: 300 },
+                    { id: 51, text: 'سؤال 51 - 500', points: 500 },
+                    { id: 52, text: 'سؤال 52 - 500', points: 500 },
+                    { id: 53, text: 'سؤال 53 - 600', points: 600 },
+                    { id: 54, text: 'سؤال 54 - 600', points: 600 }
+                ]
+            
             };
 
-            // الفئات المتاحة
             const categories = [
                 { name: 'من اللاعب', image: '/img/who-player-icon.png' },
                 { name: 'اعلام', image: '/img/kuwait-flag.png' },
                 { name: 'معلومات عامه', image: '/img/general.png' },
-                { name: 'اسلاميات', image: '/img/islamic-icon.png' },
+                { name: 'اسلاميات', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHv-B5sDJrQ_jd7N-BBVjJHvjxleklCBPxkg&s' },
                 { name: 'من سجل الهدف', image: '/img/soccer.png' },
                 { name: 'امثال كويتيه', image: '/img/amthal.png' },
                 { name: 'مقتطفات من افلام', image: '/img/movie.png' },
@@ -227,83 +227,80 @@
                 { name: 'أناشيد', image: 'https://i1.sndcdn.com/avatars-qpIGmzsYTTEnViAB-Lhp8Dw-t500x500.jpg' }
             ];
 
-            const selectedCategories = JSON.parse(localStorage.getItem('selectedCategories')) || [];
-
             const categoriesContainer = document.getElementById('categoriesContainer');
             const questionsContainer = document.getElementById('questionsContainer');
             const backToCategoriesButton = document.getElementById('backToCategoriesButton');
             const questionsList = document.getElementById('questionsList');
 
-// عرض الفئات المختارة فقط
-categories.forEach(category => {
-    if (selectedCategories.includes(category.name)) {
-        const personItem = document.createElement('div');
-        personItem.classList.add('person-item');
-        personItem.style.backgroundImage = `url(${category.image})`;
-        personItem.addEventListener('click', function() {
-            showCategoryQuestions(category.name);
-        });
-        categoriesContainer.appendChild(personItem);
-    }
-});
+            categories.forEach(category => {
+                    const personItem = document.createElement('div');
+                    personItem.classList.add('person-item');
+                    personItem.style.backgroundImage = `url(${category.image})`;
+                    personItem.addEventListener('click', function() {
+                        showCategoryQuestions(category.name);
+                    });
+                    categoriesContainer.appendChild(personItem);
+                });
 
-function showCategoryQuestions(category) {
-    const categoryQuestions = questions[category];
-    const baseId = baseIds[category];
+                function showCategoryQuestions(category) {
+                    const categoryQuestions = questions[category];
+                    const baseId = baseIds[category];
 
-    categoriesContainer.style.display = 'none';
-    questionsContainer.style.display = 'block';
-    document.getElementById('categoryTitle').textContent = `${category}`;
+                    categoriesContainer.style.display = 'none';
+                    questionsContainer.style.display = 'block';
+                    document.getElementById('categoryTitle').textContent = `${category}`;
 
-    questionsList.innerHTML = '';
+                    questionsList.innerHTML = '';
 
-    // إنشاء صفوف للأسئلة بناءً على النقاط
-    const row300 = document.createElement('div');
-    row300.classList.add('question-row');
-    const row500 = document.createElement('div');
-    row500.classList.add('question-row');
-    const row600 = document.createElement('div');
-    row600.classList.add('question-row');
+                    // إنشاء صفوف للأسئلة بناءً على النقاط
+                    const row300 = document.createElement('div');
+                    row300.classList.add('question-row');
+                    const row500 = document.createElement('div');
+                    row500.classList.add('question-row');
+                    const row600 = document.createElement('div');
+                    row600.classList.add('question-row');
 
-    categoryQuestions.forEach(question => {
-        const questionButton = document.createElement('a');
-        questionButton.href = `question.html?id=${baseId + question.id}`;
-        questionButton.classList.add('btn', 'btn-primary', 'question-button');
-        questionButton.textContent = `${question.points}`;
+                    categoryQuestions.forEach(question => {
+                        const questionButton = document.createElement('a');
+                        questionButton.href = `question.html?id=${baseId + question.id}`;
+                        questionButton.classList.add('btn', 'btn-primary', 'question-button');
+                        questionButton.textContent = `${question.points}`;
 
-        questionButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            // تغيير الدور عند النقر على سؤال
-            currentTurn = currentTurn === '1' ? '2' : '1';
-            localStorage.setItem('currentTurn', currentTurn);
-            const teamTurnText = currentTurn === '1' ? `دور ${team1}` : `دور ${team2}`;
-            document.getElementById('teamTurn').textContent = teamTurnText;
-            // الانتقال إلى صفحة السؤال
-            window.location.href = questionButton.href;
-        });
+                        questionButton.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            // تغيير الدور عند النقر على سؤال
+                            currentTurn = currentTurn === '1' ? '2' : '1';
+                            localStorage.setItem('currentTurn', currentTurn);
+                            const teamTurnText = currentTurn === '1' ? `دور ${team1}` : `دور ${team2}`;
+                            document.getElementById('teamTurn').textContent = teamTurnText;
+                            // الانتقال إلى صفحة السؤال
+                            window.location.href = questionButton.href;
+                        });
 
-        // وضع الأزرار في الصفوف حسب النقاط
-        if (question.points === 300) {
-            row300.appendChild(questionButton);
-        } else if (question.points === 500) {
-            row500.appendChild(questionButton);
-        } else if (question.points === 600) {
-            row600.appendChild(questionButton);
-        }
-    });
+                        // وضع الأزرار في الصفوف حسب النقاط
+                        if (question.points === 300) {
+                            row300.appendChild(questionButton);
+                        } else if (question.points === 500) {
+                            row500.appendChild(questionButton);
+                        } else if (question.points === 600) {
+                            row600.appendChild(questionButton);
+                        }
+                    });
 
-    // إضافة الصفوف إلى قائمة الأسئلة
-    questionsList.appendChild(row300);
-    questionsList.appendChild(row500);
-    questionsList.appendChild(row600);
-}
+                    // إضافة الصفوف إلى قائمة الأسئلة
+                    questionsList.appendChild(row300);
+                    questionsList.appendChild(row500);
+                    questionsList.appendChild(row600);
+                }
 
-backToCategoriesButton.addEventListener('click', function() {
-    categoriesContainer.style.display = 'flex';
-    questionsContainer.style.display = 'none';
-});
-});
-</script>
+                backToCategoriesButton.addEventListener('click', function() {
+                    categoriesContainer.style.display = 'flex';
+                    questionsContainer.style.display = 'none';
+                });
+            });
+        
+    </script>
 </body>
 </html>
+
 
